@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-createfile',
@@ -14,7 +15,8 @@ export class CreatefileComponent implements OnInit {
   @Output() popOutCreateFile = new EventEmitter<boolean>();
   constructor(
     private knowledgeService: KnowledgeHomeService,
-    private route: Router
+    private route: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {}
@@ -28,6 +30,7 @@ export class CreatefileComponent implements OnInit {
   createFile(fileName: string, fileText: string) {
     this.userMessagePopupWindow = '';
     if (this.validatingUserFileInput(fileName, fileText)) {
+      this.spinner.show();
       this.knowledgeService
         .createFile(fileName, fileText, this.selectedCategory)
         .subscribe(
@@ -39,6 +42,9 @@ export class CreatefileComponent implements OnInit {
           (err) => {
             this.userMessagePopupWindow =
               this.knowledgeService.handleError(err);
+          },
+          () => {
+            this.spinner.hide();
           }
         );
     }

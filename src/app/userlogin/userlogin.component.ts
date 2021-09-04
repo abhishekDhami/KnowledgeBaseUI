@@ -9,6 +9,7 @@ import {
   GoogleLoginProvider,
   SocialUser,
 } from 'angularx-social-login';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-userlogin',
@@ -38,7 +39,8 @@ export class UserloginComponent implements OnInit {
   constructor(
     private userAuthService: UserauthService,
     private route: Router,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
@@ -61,7 +63,7 @@ export class UserloginComponent implements OnInit {
   handleContinueButton() {
     //Cleaning errors
     this.errorMessage = '';
-
+    this.spinner.show();
     //Creating users from form values
     let user = new User(
       this.signinForm.get('username')?.value,
@@ -85,6 +87,9 @@ export class UserloginComponent implements OnInit {
         },
         (err: any) => {
           this.errorMessage = this.handleError(err);
+        },
+        () => {
+          this.spinner.hide();
         }
       );
     }
@@ -103,8 +108,13 @@ export class UserloginComponent implements OnInit {
         },
         (err: any) => {
           this.errorMessage = this.handleError(err);
+        },
+        () => {
+          this.spinner.hide();
         }
       );
+    } else {
+      this.spinner.hide();
     }
     return;
   }
@@ -116,6 +126,7 @@ export class UserloginComponent implements OnInit {
     this.socialAuthService
       .signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((data: SocialUser) => {
+        this.spinner.show();
         this.userAuthService
           .authGoogleUser(data.idToken)
           .then((res: any) => {
@@ -132,6 +143,9 @@ export class UserloginComponent implements OnInit {
             this.signinForm.get('username')?.setValue(data.firstName);
             this.signinForm.get('emailid')?.setValue(data.email);
             this.signinForm.get('emailid')?.disable();
+          })
+          .finally(() => {
+            this.spinner.hide();
           });
       })
       .catch((err) => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-knowledge-content',
@@ -16,7 +17,8 @@ export class KnowledgeContentComponent implements OnInit {
 
   constructor(
     private knowledgeService: KnowledgeHomeService,
-    private route: Router
+    private route: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class KnowledgeContentComponent implements OnInit {
 
   //Fetch available Categories from database for current user
   loadCategories() {
+    this.spinner.show();
     this.userMessage = '';
     this.knowledgeService
       .getCategories()
@@ -38,6 +41,9 @@ export class KnowledgeContentComponent implements OnInit {
       })
       .catch((err) => {
         this.userMessage = this.knowledgeService.handleError(err);
+      })
+      .finally(() => {
+        this.spinner.hide();
       });
   }
 
@@ -65,9 +71,11 @@ export class KnowledgeContentComponent implements OnInit {
   //Handle Save Category button
   saveCategory(newcategory: string) {
     this.userMessagePopupWindow = '';
+    this.spinner.show();
     if (newcategory.search(new RegExp('^[a-z\\d\\s]{1,20}$', 'i'))) {
       this.userMessagePopupWindow =
         'Please Enter Value without any Symbol with length of 1 to 20 characters';
+      this.spinner.hide();
     } else {
       this.knowledgeService.addCategory(newcategory).subscribe(
         (data: any) => {
@@ -76,6 +84,9 @@ export class KnowledgeContentComponent implements OnInit {
         },
         (err: any) => {
           this.userMessagePopupWindow = this.knowledgeService.handleError(err);
+        },
+        () => {
+          this.spinner.hide();
         }
       );
     }

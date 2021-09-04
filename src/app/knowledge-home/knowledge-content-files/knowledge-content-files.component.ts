@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-knowledge-content-files',
@@ -19,7 +20,8 @@ export class KnowledgeContentFilesComponent implements OnInit {
   constructor(
     private knowledgeService: KnowledgeHomeService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class KnowledgeContentFilesComponent implements OnInit {
   //Loading list of files
   loadFiles() {
     this.userMessage = '';
+    this.spinner.show();
     this.knowledgeService
       .getFiles(<string>this.selectedCategory)
       .then((res: any) => {
@@ -47,6 +50,9 @@ export class KnowledgeContentFilesComponent implements OnInit {
       })
       .catch((err) => {
         this.userMessage = this.knowledgeService.handleError(err);
+      })
+      .finally(() => {
+        this.spinner.hide();
       });
   }
 
@@ -62,6 +68,7 @@ export class KnowledgeContentFilesComponent implements OnInit {
 
   //Handing click event on File, Download respective file to user's machine
   clickOnFile(file: any) {
+    this.spinner.show();
     this.knowledgeService
       .getFile(file, this.selectedCategory)
       .toPromise()
@@ -70,6 +77,9 @@ export class KnowledgeContentFilesComponent implements OnInit {
       })
       .catch((err) => {
         this.userMessage = this.knowledgeService.handleError(err);
+      })
+      .finally(() => {
+        this.spinner.hide();
       });
   }
 

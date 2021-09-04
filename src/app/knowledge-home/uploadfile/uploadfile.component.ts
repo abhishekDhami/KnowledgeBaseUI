@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-uploadfile',
@@ -16,7 +17,8 @@ export class UploadfileComponent implements OnInit {
   @Output() popOutAddFiles = new EventEmitter<boolean>();
   constructor(
     private knowledgeService: KnowledgeHomeService,
-    private route: Router
+    private route: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {}
@@ -38,6 +40,7 @@ export class UploadfileComponent implements OnInit {
 
   //Handling Upload button event
   uploadFile() {
+    this.spinner.show();
     this.userMessagePopupWindow = '';
     let formData = new FormData();
     formData.append('file', <File>this.selectedFile);
@@ -49,6 +52,9 @@ export class UploadfileComponent implements OnInit {
       },
       (err) => {
         this.userMessagePopupWindow = this.knowledgeService.handleError(err);
+      },
+      () => {
+        this.spinner.hide();
       }
     );
   }
