@@ -11,6 +11,11 @@
         Add File
       </button></span
     >
+    <span
+      ><button (click)="createFile()" class="btn btn-primary">
+        Create File
+      </button></span
+    >
     <span style="float: right">
       <input
         type="text"
@@ -41,3 +46,11 @@
   (popOutAddFiles)="cancelAddFile()"
 >
 </app-uploadfile>
+
+<app-createfile
+  [selectedCategory]="selectedCategory"
+  *ngIf="showWindowForCreateFile"
+  (popOutCreateFile)="cancelCreateFile()"
+  (refreshFiles)="loadFiles()"
+>
+</app-createfile>

@@ -12,6 +12,7 @@ export class KnowledgeContentFilesComponent implements OnInit {
   userFiles: any;
   filteredFiles: any;
   showWindowForAddFile = false;
+  showWindowForCreateFile = false;
   selectedCategory: string = '';
   userMessage = '';
 
@@ -72,6 +73,11 @@ export class KnowledgeContentFilesComponent implements OnInit {
       });
   }
 
+  //Handle Back to Content button
+  backToContent() {
+    this.route.navigateByUrl('/knowledgehome/content');
+  }
+
   //Handle Add File button event, it will pop up Upload-file component
   addFile() {
     this.showWindowForAddFile = true;
@@ -82,8 +88,11 @@ export class KnowledgeContentFilesComponent implements OnInit {
     this.showWindowForAddFile = false;
   }
 
-  //Handle Back to Content button
-  backToContent() {
-    this.route.navigateByUrl('/knowledgehome/content');
+  createFile() {
+    this.showWindowForCreateFile = true;
+  }
+
+  cancelCreateFile() {
+    this.showWindowForCreateFile = false;
   }
 }

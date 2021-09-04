@@ -58,6 +58,7 @@ export class KnowledgeContentComponent implements OnInit {
 
   //Handle Add Category button,It will promt pop for user input
   addCategory() {
+    this.userMessagePopupWindow = '';
     this.showWindowForAddCategory = true;
   }
 

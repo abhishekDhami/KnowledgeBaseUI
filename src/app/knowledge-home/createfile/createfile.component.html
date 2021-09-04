@@ -1,0 +1,37 @@
+<div class="windowPopup">
+  <div class="addFile">
+    <div style="padding-top: 10px">
+      <div class="mb-3">
+        <label for="formFileName" class="form-label ms-5">File Name</label>
+        <input
+          class="form-control ms-5"
+          type="text"
+          id="formFileName"
+          #fileName
+        />
+      </div>
+      <div>
+        <label for="formFileText" class="form-label ms-5">File Text</label>
+        <textarea
+          class="form-control ms-5"
+          id="formFileText"
+          rows="5"
+          #fileText
+        ></textarea>
+      </div>
+      <div style="display: flex; justify-content: space-around" class="mt-2">
+        <button
+          class="btn btn-success"
+          (click)="createFile(fileName.value, fileText.value)"
+        >
+          Create
+        </button>
+        <button class="btn btn-danger" (click)="cancelCreateFilebutton()">
+          Cancel
+        </button>
+      </div>
+      <div>{{ userMessagePopupWindow }}</div>
+    </div>
+  </div>
+</div>
+<p>createfile works!</p>

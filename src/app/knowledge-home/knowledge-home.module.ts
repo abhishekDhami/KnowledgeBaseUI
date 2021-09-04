@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { KnowledgeContentComponent } from './knowledge-content/knowledge-content.component';
 import { KnowledgeContentFilesComponent } from './knowledge-content-files/knowledge-content-files.component';
 import { UploadfileComponent } from './uploadfile/uploadfile.component';
+import { CreatefileComponent } from './createfile/createfile.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { UploadfileComponent } from './uploadfile/uploadfile.component';
     KnowledgeContentComponent,
     KnowledgeContentFilesComponent,
     UploadfileComponent,
+    CreatefileComponent,
   ],
   imports: [CommonModule, KnowledgeHomeRoutingModule],
 })

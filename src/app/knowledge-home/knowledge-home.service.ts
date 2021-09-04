@@ -41,6 +41,15 @@ export class KnowledgeHomeService {
     return this.http.post(`${this.apiUrl}/uploadfile/${category}`, formdata);
   }
 
+  createFile(fileName: string, fileText: string, category: string) {
+    let option = new HttpHeaders({ 'Content-type': 'application/json' });
+    return this.http.post(
+      `${this.apiUrl}/createfile/${category}`,
+      { filename: fileName, filetext: fileText },
+      { headers: option }
+    );
+  }
+
   //Get filedata for particular category and file
   getFile(filename: string, category: string) {
     return this.http.get(`${this.apiUrl}/getfile/${category}/${filename}`, {
