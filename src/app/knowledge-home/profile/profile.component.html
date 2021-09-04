@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <!-- inline styling -->
+  <style>
+    td {
+      padding-left: 10px;
+    }
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <table>
+    <tr>
+      <td>Username</td>
+      <td>{{ currentUser.username }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ currentUser.email }}</td>
+    </tr>
+  </table>
+</div>

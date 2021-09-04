@@ -1,0 +1,49 @@
+<div style="position: absolute" class="container-fluid">
+  <section class="content-header">
+    <span>Content</span>
+    <span
+      ><button (click)="addCategory()" class="btn btn-primary">
+        Add Category
+      </button></span
+    >
+    <span style="float: right">
+      <input
+        type="text"
+        class="form-control"
+        (input)="onChangeSearchCategory(searchCategory.value)"
+        #searchCategory
+        placeholder="Search Category"
+        style="width: 200px; display: inline"
+      />
+    </span>
+  </section>
+  <section class="content-data">
+    <h2>Available Categories</h2>
+    <div>{{ userMessage }}</div>
+    <div class="maincontent">
+      <ul *ngFor="let category of filteredCategories">
+        <li (click)="clickOnCategory(category)">{{ category }}</li>
+      </ul>
+    </div>
+  </section>
+</div>
+<div *ngIf="showWindowForAddCategory" class="windowPopup">
+  <div class="addCategory">
+    <div style="padding-top: 30px">
+      New Category :
+      <input
+        type="text"
+        class="form-control"
+        #newCategory
+        style="width: 200px; display: inline"
+      />
+      <button class="btn btn-success" (click)="saveCategory(newCategory.value)">
+        Save
+      </button>
+      <button class="btn btn-danger" (click)="cancelAddCategory()">
+        Cancel
+      </button>
+      <div>{{ userMessagePopupWindow }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.loginblock {
+  width: 100%;
+  height: auto;
+}
+
+#signinBlock {
+  display: block;
+  display: flex;
+  justify-content: center;
+}
+
+td {
+  padding-top: 20px;
+  padding-right: 5px;
+}
+
+input {
+  width: 200px;
+}
+
+button {
+  width: 200px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.joinnow-button {
+  width: fit-content;
+  border: none;
+  background: transparent;
+  color: blue;
+}
+
+.joinnow-button:hover {
+  font-style: oblique;
+}

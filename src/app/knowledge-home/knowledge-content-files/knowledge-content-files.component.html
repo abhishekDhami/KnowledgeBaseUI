@@ -1,0 +1,43 @@
+<div style="position: absolute" class="container-fluid">
+  <section class="content-header">
+    <span>Category : {{ selectedCategory }}</span>
+    <span
+      ><button (click)="backToContent()" class="btn btn-info">
+        Back to Content
+      </button></span
+    >
+    <span
+      ><button (click)="addFile()" class="btn btn-primary">
+        Add File
+      </button></span
+    >
+    <span style="float: right">
+      <input
+        type="text"
+        class="form-control"
+        (input)="onChangeSearchFile(searchFile.value)"
+        placeholder="Search File"
+        #searchFile
+        style="width: 200px; display: inline"
+      />
+    </span>
+  </section>
+  <section class="files-data">
+    <h2>Available Files</h2>
+    <div>{{ userMessage }}</div>
+    <div class="maincontent">
+      <ul *ngFor="let file of filteredFiles">
+        <li (click)="clickOnFile(file)" title="Click me to Download">
+          {{ file }}
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+<app-uploadfile
+  [selectedCategory]="selectedCategory"
+  *ngIf="showWindowForAddFile"
+  (refreshFiles)="loadFiles()"
+  (popOutAddFiles)="cancelAddFile()"
+>
+</app-uploadfile>

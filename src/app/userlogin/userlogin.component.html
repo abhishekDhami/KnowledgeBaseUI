@@ -1,0 +1,52 @@
+<div style="padding-top: 100px; text-align: center">
+  <h1>{{ userHasAccount ? "Login to" : "Join" }} KnowledgeBase</h1>
+  <div class="loginblock">
+    <div id="signinBlock">
+      <form [formGroup]="signinForm">
+        <button
+          *ngIf="showGoogleButton"
+          type="button"
+          (click)="continueWithGoogle()"
+          class="btn btn-primary"
+        >
+          Continue With Google
+        </button>
+        <div>----Or----</div>
+        <table>
+          <tr>
+            <td><label for="username">User Name* </label></td>
+            <td>
+              <input id="username" type="text" formControlName="username" />
+            </td>
+          </tr>
+          <tr *ngIf="!userHasAccount">
+            <td><label for="emailid">Email* </label></td>
+            <td>
+              <input id="emailid" type="email" formControlName="emailid" />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="password">Password*</label></td>
+            <td>
+              <input id="password" type="password" formControlName="password" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <button
+      type="button"
+      (click)="handleContinueButton()"
+      class="btn btn-success"
+    >
+      Continue
+    </button>
+    <p style="color: darkred">{{ errorMessage }}</p>
+    <p>
+      {{ userHasAccount ? "Not a member Yet?" : "Already a Member?" }}
+      <button class="joinnow-button" (click)="toggleSignInForm()">
+        {{ userHasAccount ? "Join Now" : "Login" }}
+      </button>
+    </p>
+  </div>
+</div>

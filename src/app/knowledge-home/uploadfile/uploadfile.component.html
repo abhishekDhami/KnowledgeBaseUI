@@ -1,0 +1,28 @@
+<div class="windowPopup">
+  <div class="addFile">
+    <div style="padding-top: 30px">
+      <div class="mb-3">
+        <label for="formFile" class="form-label ms-5">Select File</label>
+        <input
+          class="form-control"
+          (change)="onFileSelected($event)"
+          type="file"
+          id="formFile"
+        />
+      </div>
+      <div style="display: flex; justify-content: space-around">
+        <button
+          [disabled]="!isfileSelected"
+          (click)="uploadFile()"
+          class="btn btn-success"
+        >
+          Upload
+        </button>
+        <button class="btn btn-danger" (click)="cancelAddFilebutton()">
+          Cancel
+        </button>
+      </div>
+      <div>{{ userMessagePopupWindow }}</div>
+    </div>
+  </div>
+</div>

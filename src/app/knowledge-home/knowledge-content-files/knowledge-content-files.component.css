@@ -1,0 +1,39 @@
+.content-header {
+  width: 100%;
+  height: 70px;
+  background-color: lightcyan;
+  font-size: larger;
+  padding-top: 20px;
+}
+
+.content-header > span {
+  padding-left: 20px;
+}
+
+.maincontent {
+  padding-left: 15px;
+}
+
+ul {
+  margin: 5px;
+  font-size: medium;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+li {
+  width: 80vw;
+  background-color: rgb(255, 211, 211);
+  padding-left: 10px;
+}
+
+li:hover {
+  background-color: rgb(216, 137, 137);
+}
+
+button {
+  margin-left: 10px;
+}
+
+.back-button {
+  font-size: 15px;
+}
