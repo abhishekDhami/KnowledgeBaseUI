@@ -9,7 +9,7 @@ Angular App for Knowledgebase.
   4. Make sure Node-service Api is running.
   5. Run Angular app locally:
   
-    Run Command: npm startlocal (if want to use proxy)
+    Run Command: npm run startlocal (if want to use proxy)
     else
     Run Command:npm start
   
