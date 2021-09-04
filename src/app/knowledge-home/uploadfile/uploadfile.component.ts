@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
-import { handleError } from '../commonFunction';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-uploadfile',
@@ -14,7 +14,10 @@ export class UploadfileComponent implements OnInit {
   @Input() selectedCategory: string = '';
   @Output() refreshFiles = new EventEmitter<string>();
   @Output() popOutAddFiles = new EventEmitter<boolean>();
-  constructor(private knowledgeService: KnowledgeHomeService) {}
+  constructor(
+    private knowledgeService: KnowledgeHomeService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -45,7 +48,7 @@ export class UploadfileComponent implements OnInit {
         this.popOutAddFiles.emit(true);
       },
       (err) => {
-        this.userMessagePopupWindow = handleError(err);
+        this.userMessagePopupWindow = this.knowledgeService.handleError(err);
       }
     );
   }

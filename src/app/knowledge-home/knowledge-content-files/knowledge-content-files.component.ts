@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { handleError } from '../commonFunction';
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -46,7 +45,7 @@ export class KnowledgeContentFilesComponent implements OnInit {
         }
       })
       .catch((err) => {
-        this.userMessage = handleError(err);
+        this.userMessage = this.knowledgeService.handleError(err);
       });
   }
 
@@ -68,7 +67,9 @@ export class KnowledgeContentFilesComponent implements OnInit {
       .then((blob) => {
         saveAs(blob, file);
       })
-      .catch((err) => console.error('download error = ', err));
+      .catch((err) => {
+        this.userMessage = this.knowledgeService.handleError(err);
+      });
   }
 
   //Handle Add File button event, it will pop up Upload-file component

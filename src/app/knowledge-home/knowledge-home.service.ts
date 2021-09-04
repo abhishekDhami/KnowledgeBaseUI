@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { UserauthService } from '../services/userauth.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class KnowledgeHomeService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private userAuthService: UserauthService
+  ) {}
 
   //Fetch list of category for current user
   getCategories() {
@@ -40,5 +46,18 @@ export class KnowledgeHomeService {
     return this.http.get(`${this.apiUrl}/getfile/${category}/${filename}`, {
       responseType: 'blob',
     });
+  }
+
+  //Handling Error, If got 401 code then redirecting to Login page
+  handleError(err: any) {
+    if (err.error?.msg) return err.error.msg;
+    if (err.status === 401) {
+      this.userAuthService.removeSession();
+      this.route.navigateByUrl('/login');
+      return '';
+    }
+    if (err.statusText) return `${err.statusText}. Try After some Time`;
+    if (err.message) return err.message;
+    return 'Some Error Occured';
   }
 }

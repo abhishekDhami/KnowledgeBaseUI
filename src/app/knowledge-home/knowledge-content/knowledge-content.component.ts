@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KnowledgeHomeService } from '../knowledge-home.service';
 import { Router } from '@angular/router';
-import { handleError } from '../commonFunction';
 
 @Component({
   selector: 'app-knowledge-content',
@@ -38,7 +37,7 @@ export class KnowledgeContentComponent implements OnInit {
         }
       })
       .catch((err) => {
-        this.userMessage = handleError(err);
+        this.userMessage = this.knowledgeService.handleError(err);
       });
   }
 
@@ -75,7 +74,7 @@ export class KnowledgeContentComponent implements OnInit {
           this.showWindowForAddCategory = false;
         },
         (err: any) => {
-          this.userMessagePopupWindow = handleError(err);
+          this.userMessagePopupWindow = this.knowledgeService.handleError(err);
         }
       );
     }
