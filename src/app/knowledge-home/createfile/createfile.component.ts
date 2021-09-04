@@ -29,6 +29,9 @@ export class CreatefileComponent implements OnInit {
   //Handling Upload button event
   createFile(fileName: string, fileText: string) {
     this.userMessagePopupWindow = '';
+    if (fileText.length == 0) {
+      fileText = 'No Data provided';
+    }
     if (this.validatingUserFileInput(fileName, fileText)) {
       this.spinner.show();
       this.knowledgeService
@@ -49,7 +52,6 @@ export class CreatefileComponent implements OnInit {
 
   //Validating User's Input file, Limiting File to 2MB in size
   validatingUserFileInput(fileName: string, fileText: string) {
-    console.log(fileName, fileText);
     if (
       fileName.search(
         new RegExp(
