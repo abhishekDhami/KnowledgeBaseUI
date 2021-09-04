@@ -12,5 +12,6 @@ Angular App for Knowledgebase.
     Run Command: npm run startlocal (if want to use proxy)
     else
     Run Command:npm start
+  6. Goto http://localhost:4200/
   
   
