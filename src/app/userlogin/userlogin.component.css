@@ -34,3 +34,7 @@ button {
 .joinnow-button:hover {
   font-style: oblique;
 }
+
+.googlebutton {
+  width: 250px;
+}
