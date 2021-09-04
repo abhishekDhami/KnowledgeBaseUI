@@ -33,20 +33,17 @@ export class CreatefileComponent implements OnInit {
       this.spinner.show();
       this.knowledgeService
         .createFile(fileName, fileText, this.selectedCategory)
-        .subscribe(
-          (data) => {
-            //On Successful upload refresh list of the files
-            this.refreshFiles.emit('refresh');
-            this.popOutCreateFile.emit(true);
-          },
-          (err) => {
-            this.userMessagePopupWindow =
-              this.knowledgeService.handleError(err);
-          },
-          () => {
-            this.spinner.hide();
-          }
-        );
+        .then((data) => {
+          //On Successful upload refresh list of the files
+          this.refreshFiles.emit('refresh');
+          this.popOutCreateFile.emit(true);
+        })
+        .catch((err) => {
+          this.userMessagePopupWindow = this.knowledgeService.handleError(err);
+        })
+        .finally(() => {
+          this.spinner.hide();
+        });
     }
   }
 

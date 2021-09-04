@@ -77,18 +77,18 @@ export class KnowledgeContentComponent implements OnInit {
         'Please Enter Value without any Symbol with length of 1 to 20 characters';
       this.spinner.hide();
     } else {
-      this.knowledgeService.addCategory(newcategory).subscribe(
-        (data: any) => {
+      this.knowledgeService
+        .addCategory(newcategory)
+        .then((data: any) => {
           this.loadCategories();
           this.showWindowForAddCategory = false;
-        },
-        (err: any) => {
+        })
+        .catch((err: any) => {
           this.userMessagePopupWindow = this.knowledgeService.handleError(err);
-        },
-        () => {
+        })
+        .finally(() => {
           this.spinner.hide();
-        }
-      );
+        });
     }
   }
 

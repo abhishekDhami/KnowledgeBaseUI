@@ -20,17 +20,21 @@ export class UserauthService {
   //Validating user with Username and password
   validateUser(user: User) {
     let option = new HttpHeaders({ 'Content-type': 'application/json' });
-    return this.http.post(
-      `${this.apiUrl}/login`,
-      { username: user.username, password: user.password },
-      { headers: option }
-    );
+    return this.http
+      .post(
+        `${this.apiUrl}/login`,
+        { username: user.username, password: user.password },
+        { headers: option }
+      )
+      .toPromise();
   }
 
   //for Registering new User
   registerUser(user: User) {
     let option = new HttpHeaders({ 'Content-type': 'application/json' });
-    return this.http.post(`${this.apiUrl}/register`, user, { headers: option });
+    return this.http
+      .post(`${this.apiUrl}/register`, user, { headers: option })
+      .toPromise();
   }
 
   //Signin/ Signup wih Google

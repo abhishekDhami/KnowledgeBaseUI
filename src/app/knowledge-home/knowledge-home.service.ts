@@ -29,32 +29,40 @@ export class KnowledgeHomeService {
   //Add Category to User's Content list
   addCategory(newcategory: string) {
     let option = new HttpHeaders({ 'Content-type': 'application/json' });
-    return this.http.post(
-      `${this.apiUrl}/addcategory`,
-      { newCategory: newcategory },
-      { headers: option }
-    );
+    return this.http
+      .post(
+        `${this.apiUrl}/addcategory`,
+        { newCategory: newcategory },
+        { headers: option }
+      )
+      .toPromise();
   }
 
   //Add/upload file to selected category for current user
   addFile(formdata: FormData, category: string) {
-    return this.http.post(`${this.apiUrl}/uploadfile/${category}`, formdata);
+    return this.http
+      .post(`${this.apiUrl}/uploadfile/${category}`, formdata)
+      .toPromise();
   }
 
   createFile(fileName: string, fileText: string, category: string) {
     let option = new HttpHeaders({ 'Content-type': 'application/json' });
-    return this.http.post(
-      `${this.apiUrl}/createfile/${category}`,
-      { filename: fileName, filetext: fileText },
-      { headers: option }
-    );
+    return this.http
+      .post(
+        `${this.apiUrl}/createfile/${category}`,
+        { filename: fileName, filetext: fileText },
+        { headers: option }
+      )
+      .toPromise();
   }
 
   //Get filedata for particular category and file
   getFile(filename: string, category: string) {
-    return this.http.get(`${this.apiUrl}/getfile/${category}/${filename}`, {
-      responseType: 'blob',
-    });
+    return this.http
+      .get(`${this.apiUrl}/getfile/${category}/${filename}`, {
+        responseType: 'blob',
+      })
+      .toPromise();
   }
 
   //Handling Error, If got 401 code then redirecting to Login page

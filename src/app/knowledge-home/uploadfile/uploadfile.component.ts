@@ -44,19 +44,19 @@ export class UploadfileComponent implements OnInit {
     this.userMessagePopupWindow = '';
     let formData = new FormData();
     formData.append('file', <File>this.selectedFile);
-    this.knowledgeService.addFile(formData, this.selectedCategory).subscribe(
-      (data) => {
+    this.knowledgeService
+      .addFile(formData, this.selectedCategory)
+      .then((data) => {
         //On Successful upload refresh list of the files
         this.refreshFiles.emit('refresh');
         this.popOutAddFiles.emit(true);
-      },
-      (err) => {
+      })
+      .catch((err) => {
         this.userMessagePopupWindow = this.knowledgeService.handleError(err);
-      },
-      () => {
+      })
+      .finally(() => {
         this.spinner.hide();
-      }
-    );
+      });
   }
 
   //Validating User's Input file, Limiting File to 2MB in size

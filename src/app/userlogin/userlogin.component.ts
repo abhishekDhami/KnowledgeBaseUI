@@ -80,18 +80,18 @@ export class UserloginComponent implements OnInit {
         this.signinForm.get('emailid')
       )
     ) {
-      this.userAuthService.registerUser(user).subscribe(
-        (res: any) => {
+      this.userAuthService
+        .registerUser(user)
+        .then((res: any) => {
           this.userAuthService.setSession(res.token, res.user);
           this.route.navigateByUrl('/knowledgehome');
-        },
-        (err: any) => {
+        })
+        .catch((err: any) => {
           this.errorMessage = this.handleError(err);
-        },
-        () => {
+        })
+        .finally(() => {
           this.spinner.hide();
-        }
-      );
+        });
     }
     //Handling Login for Existing Users
     else if (
@@ -101,18 +101,18 @@ export class UserloginComponent implements OnInit {
         this.signinForm.get('password')
       )
     ) {
-      this.userAuthService.validateUser(user).subscribe(
-        (res: any) => {
+      this.userAuthService
+        .validateUser(user)
+        .then((res: any) => {
           this.userAuthService.setSession(res.token, res.user);
           this.route.navigateByUrl('/knowledgehome');
-        },
-        (err: any) => {
+        })
+        .catch((err: any) => {
           this.errorMessage = this.handleError(err);
-        },
-        () => {
+        })
+        .finally(() => {
           this.spinner.hide();
-        }
-      );
+        });
     } else {
       this.spinner.hide();
     }

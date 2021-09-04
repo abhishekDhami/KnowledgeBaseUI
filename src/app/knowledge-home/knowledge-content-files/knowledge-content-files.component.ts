@@ -71,7 +71,6 @@ export class KnowledgeContentFilesComponent implements OnInit {
     this.spinner.show();
     this.knowledgeService
       .getFile(file, this.selectedCategory)
-      .toPromise()
       .then((blob) => {
         saveAs(blob, file);
       })
